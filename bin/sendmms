@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+// Twilio
+var client = require('twilio')('AC150a9059938a4b8488bbdba148c1ce26', 'b01d497b28e826fe70d5dee7c982749b');
+
+// Send the MMS
+client.sendMms({
+
+    from:'+14152025568', // Any number Twilio can deliver to
+    to: '+14153196791', // A number you bought from Twilio and can use for outbound communication
+    body: 'word to your mother.', // body of the SMS message
+    mediaUrl: 'http://media1.giphy.com/media/x58AS8I9DBRgA/giphy.gif'
+
+}, function(err, responseData) { //this function is executed when a response is received from Twilio
+
+    if (!err) { // "err" is an error received during the request, if any
+
+        // "responseData" is a JavaScript object containing data received from Twilio.
+        // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
+        // http://www.twilio.com/docs/api/rest/sending-sms#example-1
+
+        console.log(responseData);
+
+    }
+});
