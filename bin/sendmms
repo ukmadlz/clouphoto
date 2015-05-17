@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+var config = require('../config');
+
 // Twilio
-var client = require('twilio')('AC150a9059938a4b8488bbdba148c1ce26', 'b01d497b28e826fe70d5dee7c982749b');
+var client = require('twilio')(config.twilio.sid, config.twilio.token);
 
 // Send the MMS
 client.sendMms({

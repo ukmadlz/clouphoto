@@ -16,30 +16,26 @@ var vcapServices = {
 if (process.env.VCAP_SERVICES) {
   var vcapServices = JSON.parse(process.env.VCAP_SERVICES);
   // 3rd Party
-  if (vcapServices.user-provided) {
-    for (i = 0; i < vcapServices.user-provided.length; i++) {
-      // Twilio
-      if (vcapServices.user-provided[i].credential.url == 'https://api.twilio.com') {
-        vcapServices.twilio = vcapServices.user-provided[i].credential;
+  if (vcapServices['user-provided']) {
+    vcapServices['user-provided'].forEach(function(service) {
+      if (service.credentials.url == 'https://api.twilio.com') {
+        vcapServices.twilio = service.credentials;
       }
-    }
+    });
   }
 }
 
-var config = {};
+// Port
+exports.port = process.env.VCAP_APP_PORT || process.env.PORT || '3000';
 
 // Cloudant
-config.cloudant = {
+exports.cloudant = {
   account: (vcapServices.cloudantNoSQLDB[0])? vcapServices.cloudantNoSQLDB[0].credentials.username : process.env.CLOUDANT_USERNAME,
   password: (vcapServices.cloudantNoSQLDB[0])? vcapServices.cloudantNoSQLDB[0].credentials.password : process.env.CLOUDANT_PASSWORD
 }
 
 // Twilio
-config.twilio = {
+exports.twilio = {
   sid: vcapServices.twilio.accountSID || process.env.TWILIO_SID,
   token: vcapServices.twilio.authToken || process.env.TWILIO_TOKEN
 }
-
-console.log(config);
-
-exports = config;
