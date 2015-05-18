@@ -1,0 +1,17 @@
+{
+  "name": "clouphoto",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ukmadlz/clouphoto",
+  "authors": [
+    "Mike Elsmore <mike.elsmore@uk.ibm.com>"
+  ],
+  "description": "A quick demo glueing Cloudant and Twilio together\"",
+  "license": "Apache 2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
